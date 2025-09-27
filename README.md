@@ -5,6 +5,7 @@
 2. [DNS and Subdomains](#dns-and-subdomains)
     1. [Digging DNS](#digging-dns)
     2. [Subdomain Bruteforcing](#subdomain-bruteforcing)
+    3. [DNS Zone Transfers](#dns-zone-transfers)
 
 ## whois
 ### Tools
@@ -93,3 +94,27 @@
     Here the output.
 
     ![alt text](assets/DNS4.png)
+
+### DNS Zone Transfers
+#### Tools
+- dig
+#### Challenges
+1. After performing a zone transfer for the domain inlanefreight.htb on the target system, how many DNS records are retrieved from the target system's name server? Provide your answer as an integer, e.g, 123.
+
+    We can use dig to solve this.
+    ```bash
+    dig axfr inlanefreight.htb @10.129.140.80
+    ```
+    Here the result. 
+
+    ![alt text](assets/DNS5.png)
+
+    Based on that, the answer is 22. We count from first SOA until last SOA.
+
+2. Within the zone record transferred above, find the ip address for ftp.admin.inlanefreight.htb. Respond only with the IP address, eg 127.0.0.1
+
+    We can get the answer from the previous output.
+
+3. Within the same zone record, identify the largest IP address allocated within the 10.10.200 IP range. Respond with the full IP address, eg 10.10.200.1
+
+    The answer is 10.10.200.14 from the first output.
