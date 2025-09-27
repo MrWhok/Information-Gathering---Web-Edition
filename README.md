@@ -7,6 +7,7 @@
     2. [Subdomain Bruteforcing](#subdomain-bruteforcing)
     3. [DNS Zone Transfers](#dns-zone-transfers)
     4. [Virtual Host](#virtual-hosts)
+3. [Fingerprinting](#fingerprinting)
 
 ## whois
 ### Tools
@@ -168,3 +169,44 @@
     ```
 
     The answer is `support`.
+
+## Fingerprinting
+### Tools
+- Wappalyzer
+- BuiltWith
+- WhatWeb
+- Nmap
+- Netcraft
+- wafw00f
+- nikto
+### Challenges
+1. Determine the Apache version running on app.inlanefreight.local on the target system. (Format: 0.0.0)
+
+    To solve this, we can use `CURL` with `-I` option.
+
+    ```bash
+    curl -I --resolve app.inlanefreight.local:80:10.129.208.33 http://app.inlanefreight.local
+    ```
+    The answer is `2.4.41`
+
+2. Which CMS is used on app.inlanefreight.local on the target system? Respond with the name only, e.g., WordPress.
+
+    We can solve this by using `CURL` again but with `-v` option.
+
+    ```bash 
+    curl -v --resolve app.inlanefreight.local:80:10.129.208.33 http://app.inlanefreight.local
+    ```
+
+    ![alt text](assets/footprinting1.png)
+
+    Based on the output, the answer is `Joomla`.
+
+3. On which operating system is the dev.inlanefreight.local webserver running in the target system? Respond with the name only, e.g., Debian.
+
+    Similar to first question, we can solve this with `CURL -I`.
+
+    ```bash
+    curl -I --resolve dev.inlanefreight.local:80:10.129.208.33 http://dev.inlanefreight.local
+    ```
+
+    The answer is `Ubuntu`.
