@@ -2,9 +2,10 @@
 
 ## Table of Contents
 1. [whois](#whois)
+2. [DNS](#dns)
 
 ## whois
-## Tools
+### Tools
 - whois
 
 ### Challenges
@@ -29,3 +30,39 @@
 
     ![alt text](assets/whois2.png)
 
+## DNS
+### Tools
+- dig
+- nslookup
+- host
+- dnsenum
+- fierce
+- dnsrecon
+- theHarvester
+- Online DNS Lookup Services
+
+## Challenges
+1. Which IP address maps to inlanefreight.com?
+
+    To solve this we can use `dig` combine with `A` to retrive IPv4 address.
+
+    ```bash
+    dig inlanefreight.com A
+    ```
+
+    ![alt text](assets/DNS1.png)
+
+2. Which domain is returned when querying the PTR record for 134.209.24.248?
+
+    We can get the answer from the previous image. Here the details.
+
+    ![alt text](assets/DNS2.png)
+
+3. What is the full domain returned when you query the mail records for facebook.com?
+
+    We can combine `dig` with MX to get the full domain when querying the mail record.
+
+    ```bash
+    dig facebook.com MX 
+    ``` 
+    ![alt text](assets/DNS3.png)
