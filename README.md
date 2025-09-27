@@ -8,6 +8,7 @@
     3. [DNS Zone Transfers](#dns-zone-transfers)
     4. [Virtual Host](#virtual-hosts)
 3. [Fingerprinting](#fingerprinting)
+4. [Crawling](#crawling)
 
 ## whois
 ### Tools
@@ -210,3 +211,20 @@
     ```
 
     The answer is `Ubuntu`.
+
+## Crawling
+### Tools
+- Burp Suite Spider
+- OWASP ZAP (Zed Attack Proxy)
+- Scrapy (Python Framework)
+- Apache Nutch (Scalable Crawler)
+### Challenges
+1. After spidering inlanefreight.com, identify the location where future reports will be stored. Respond with the full domain, e.g., files.inlanefreight.com.
+
+    We can solve this by using ReconSpider.py. After that, we can see the answer on the comment section result.
+
+    ```bash
+    python ReconSpider.py https://inlanefreight.com
+    ```
+
+    The answer is `inlanefreight-comp133.s3.amazonaws.htb`.
