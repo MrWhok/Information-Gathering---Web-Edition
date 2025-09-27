@@ -6,6 +6,7 @@
     1. [Digging DNS](#digging-dns)
     2. [Subdomain Bruteforcing](#subdomain-bruteforcing)
     3. [DNS Zone Transfers](#dns-zone-transfers)
+    4. [Virtual Host](#virtual-hosts)
 
 ## whois
 ### Tools
@@ -118,3 +119,52 @@
 3. Within the same zone record, identify the largest IP address allocated within the 10.10.200 IP range. Respond with the full IP address, eg 10.10.200.1
 
     The answer is 10.10.200.14 from the first output.
+
+### Virtual Hosts
+#### Tools
+- gobuster
+- Feroxbuster
+- ffuf
+
+### Challenges
+1. Brute-force vhosts on the target system. What is the full subdomain that is prefixed with "web"? Answer using the full domain, e.g. "x.inlanefreight.htb"
+
+    For faster and specific result, i used ffuf tools with filtering.
+
+    ```bash
+    grep '^web' "/home/mrwhok/tools/SecLists/Discovery/DNS/subdomains-top1million-110000.txt" | ffuf -u http://94.237.57.115:37780 -H "Host: FUZZ.inlanefreight.htb" -w - -fs 116
+    ```
+
+    The answer is `web17611`.
+
+2. Brute-force vhosts on the target system. What is the full subdomain that is prefixed with "vm"? Answer using the full domain, e.g. "x.inlanefreight.htb"
+
+    ```bash
+    grep '^vm' "/home/mrwhok/tools/SecLists/Discovery/DNS/subdomains-top1million-110000.txt" | ffuf -u http://94.237.57.115:37780 -H "Host: FUZZ.inlanefreight.htb" -w - -fs 116
+    ```
+
+    The answer is `vm5`.
+
+3. Brute-force vhosts on the target system. What is the full subdomain that is prefixed with "br"? Answer using the full domain, e.g. "x.inlanefreight.htb"
+
+    ```bash
+    grep '^br' "/home/mrwhok/tools/SecLists/Discovery/DNS/subdomains-top1million-110000.txt" | ffuf -u http://94.237.57.115:37780 -H "Host: FUZZ.inlanefreight.htb" -w - -fs 116
+    ```
+
+    The answer is `browse`.
+
+4. Brute-force vhosts on the target system. What is the full subdomain that is prefixed with "a"? Answer using the full domain, e.g. "x.inlanefreight.htb"
+
+    ```bash
+    grep '^a' "/home/mrwhok/tools/SecLists/Discovery/DNS/subdomains-top1million-110000.txt" | ffuf -u http://94.237.57.115:37780 -H "Host: FUZZ.inlanefreight.htb" -w - -fs 116
+    ```
+
+    The answer is `admin`.
+
+5. Brute-force vhosts on the target system. What is the full subdomain that is prefixed with "su"? Answer using the full domain, e.g. "x.inlanefreight.htb"
+
+    ```bash
+    grep '^su' "/home/mrwhok/tools/SecLists/Discovery/DNS/subdomains-top1million-110000.txt" | ffuf -u http://94.237.57.115:37780 -H "Host: FUZZ.inlanefreight.htb" -w - -fs 116
+    ```
+
+    The answer is `support`.
