@@ -9,6 +9,7 @@
     4. [Virtual Host](#virtual-hosts)
 3. [Fingerprinting](#fingerprinting)
 4. [Crawling](#crawling)
+5. [Web Archives](#web-archives)
 
 ## whois
 ### Tools
@@ -228,3 +229,40 @@
     ```
 
     The answer is `inlanefreight-comp133.s3.amazonaws.htb`.
+
+## Web Archives
+### Tools
+- (Wayback Machine)[https://web.archive.org/]
+### Challenges
+1. How many Pen Testing Labs did HackTheBox have on the 8th August 2018? Answer with an integer, eg 1234.
+
+    We can solve this using Wayback machine and use this url.
+    ```
+    https://www.hackthebox.eu/
+    ```
+
+    The answer is `74`.
+
+2. How many members did HackTheBox have on the 10th June 2017? Answer with an integer, eg 1234.
+
+    By using wayback machine like in the previous, the answer is `3054`.
+
+3. Going back to March 2002, what website did the facebook.com domain redirect to? Answer with the full domain, eg http://www.facebook.com/
+
+    From this [link](https://web.archive.org/web/20020328015153/facebook.com), the answer is `http://site.aboutface.com/`.
+
+4. According to the paypal.com website in October 1999, what could you use to "beam money to anyone"? Answer with the product name, eg My Device, remove the ™ from your answer.
+
+    From this [link](https://web.archive.org/web/19991013140707/http://paypal.com/), the answer is `Palm 0rganizer`.
+
+5. Going back to November 1998 on google.com, what address hosted the non-alpha "Google Search Engine Prototype" of Google? Answer with the full address, eg http://google.com
+
+    Go to this [link](https://web.archive.org/web/19981111184551/http://google.com/) and click `Google Search Engine Prototype` link, the answer is `http://google.stanford.edu/`.
+
+6. Going back to March 2000 on www.iana.org, when exacty was the site last updated? Answer with the date in the footer, eg 11-March-99
+
+    From this [link](https://web.archive.org/web/20000303211237/http://www.iana.org/), the answer is `17-December-99`.
+
+7. According to wikipedia.com snapshot taken on February 9, 2003, how many articles were they already working on in the English version? Answer with the number they state without any commas, e.g., 100000, not 100,000.
+
+    From this [link](https://web.archive.org/web/20030815000000*/wikipedia.com), the answer is `104155`.
