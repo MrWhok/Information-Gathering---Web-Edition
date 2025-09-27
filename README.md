@@ -2,7 +2,9 @@
 
 ## Table of Contents
 1. [whois](#whois)
-2. [DNS](#dns)
+2. [DNS and Subdomains](#dns-and-subdomains)
+    1. [Digging DNS](#digging-dns)
+    2. [Subdomain Bruteforcing](#subdomain-bruteforcing)
 
 ## whois
 ### Tools
@@ -30,8 +32,9 @@
 
     ![alt text](assets/whois2.png)
 
-## DNS
-### Tools
+## DNS and Subdomains
+### Digging DNS
+#### Tools
 - dig
 - nslookup
 - host
@@ -41,7 +44,7 @@
 - theHarvester
 - Online DNS Lookup Services
 
-## Challenges
+#### Challenges
 1. Which IP address maps to inlanefreight.com?
 
     To solve this we can use `dig` combine with `A` to retrive IPv4 address.
@@ -66,3 +69,27 @@
     dig facebook.com MX 
     ``` 
     ![alt text](assets/DNS3.png)
+
+### Subdomain Bruteforcing
+#### Tools
+- dnsenum
+- ffuf
+- gobuster 
+- fierce
+- dnsrecon
+- amass
+- assetfinder	
+- puredns
+
+#### Challenges
+1. Using the known subdomains for inlanefreight.com (www, ns1, ns2, ns3, blog, support, customer), find any missing subdomains by brute-forcing possible domain names. Provide your answer with the complete subdomain, e.g., www.inlanefreight.com.
+
+    To solve this, we can use dnsenum with SecList wordlist.
+
+    ```bash
+    dnsenum --enum inlanefreight.com -f  /home/mrwhok/tools/SecLists/Discovery/DNS/subdomains-top1million-20000.txt
+    ```
+
+    Here the output.
+
+    ![alt text](assets/DNS4.png)
