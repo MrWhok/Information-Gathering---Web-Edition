@@ -10,6 +10,7 @@
 3. [Fingerprinting](#fingerprinting)
 4. [Crawling](#crawling)
 5. [Web Archives](#web-archives)
+6. [Automating Recon](#automating-recon)
 
 ## whois
 ### Tools
@@ -266,3 +267,11 @@
 7. According to wikipedia.com snapshot taken on February 9, 2003, how many articles were they already working on in the English version? Answer with the number they state without any commas, e.g., 100000, not 100,000.
 
     From this [link](https://web.archive.org/web/20030815000000*/wikipedia.com), the answer is `104155`.
+
+## Automating Recon
+### Tools
+- FinalRecon
+- Recon-ng
+- theHarvester
+- SpiderFoot
+- OSINT Framework
