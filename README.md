@@ -275,3 +275,77 @@
 - theHarvester
 - SpiderFoot
 - OSINT Framework
+
+## Skill Assesment
+Before work on the task, i added domain to my host.
+```bash
+echo "94.237.123.119 inlanefreight.htb" | sudo tee -a /etc/hosts
+```
+1. What is the IANA ID of the registrar of the inlanefreight.com domain?
+
+    We can solve this using `whois` and find IANA lines.
+
+    ```bash
+    whois inlanefreight.com
+    ```
+
+    The answer is `468`.
+
+2. What http server software is powering the inlanefreight.htb site on the target system? Respond with the name of the software, not the version, e.g., Apache.
+
+    We can solve this using `curl -I`.
+
+    ```bash
+    curl -I http://inlanefreight.htb:37249
+    ```
+
+    The answer is `nginx`.
+
+3. What is the API key in the hidden admin directory that you have discovered on the target system?
+
+    To solve this, in here i used `ffuf` to bruteforce the VHOSTS.
+    
+    ```bash
+    ffuf -w ~/tools/SecLists/Discovery/DNS/subdomains-top1million-110000.txt -u http://94.237.122.241:33800 -H "Host: FUZZ.inlanefreight.htb" -fs 120
+    ```
+
+    Here the result, we find `web1337`.
+
+    ![alt text](assets/FA1.png)
+
+    Then i modified /etc/hosts to add that vhosts, `94.237.122.241 inlanefreight.htb web1337.inlanefreight.htb`. After that, we used `ffuf` again but now to find any folder/file in there.
+
+    ```bash
+    ffuf -w ~/tools/SecLists/Discovery/Web-Content/common.txt:FUZZ -u http://web1337.inlanefreight.htb:33800/FUZZ -e .html
+    ```
+
+    ![alt text](assets/FA2.png)
+
+    We can see it have robots.txt. Here the content of it.
+
+    ![alt text](assets/FA3.png)
+
+    It have suspicious path, `/admin_h1dd3n`. Then we check the content of it.
+
+    ![alt text](assets/FA4.png)
+
+    Here we get the API Key. The answer is `e963d863ee0e82ba7080fbf558ca0d3f`.
+
+4. After crawling the inlanefreight.htb domain on the target system, what is the email address you have found? Respond with the full email, e.g., mail@inlanefreight.htb.
+
+    I have tried using `ReconSpider.py` to crawl `web1337.inlanefreight.htb` but its got nothing. So i tried to FUZZ again to find any VHOSTS from that.
+
+    ```bash
+    ffuf -w ~/tools/SecLists/Discovery/DNS/subdomains-top1million-110000.txt -u http://94.237.122.241:33800 -H "Host: FUZZ.web1337.inlanefreight.htb" -fs 120
+    ```
+
+    We get `dev` from that. Then i tried using `ReconSpider.py` again but with `dev.web1337.inlanefreight.htb`. Dont forget to add that in the /etc/hosts too.
+
+    ```bash
+    python ReconSpider.py http://dev.web1337.inlanefreight.htb:33800
+    ```
+    Then we can get the result in the email section from results.json. The answer is `1337testing@inlanefreight.htb`.
+
+5. What is the API key the inlanefreight.htb developers will be changing too?
+
+    We can get the answer from `ReconSpider.py` result in the comment section. The answer is `ba988b835be4aa97d068941dc852ff33`.
